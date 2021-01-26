@@ -27,8 +27,7 @@ const makeFakeRequest = (): HttpRequest => ({
     password: 'any_password',
     passwordConfirm: 'any_password'
   }
-}
-)
+})
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
