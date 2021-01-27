@@ -122,20 +122,6 @@ describe('Signup Controller', () => {
     expect(httpResponse).toEqual(serverError((new ServerError(null))))
   })
 
-  test('Should return 400, if password confirm fails', async () => {
-    const { sut } = makeSut()
-    const httpRequest = {
-      body: {
-        name: 'any_name',
-        email: 'any_email@mail.com',
-        password: 'any_password',
-        passwordConfirm: 'invalid_password'
-      }
-    }
-    const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(badRequest(new InvalidParamError('passwordConfirm')))
-  })
-
   test('Should return 200, if an valid data is provided', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
