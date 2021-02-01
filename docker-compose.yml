@@ -1,7 +1,7 @@
 version: "3"
 services:
-  container_name: mongo-container
   mongo:
+    container_name: mongo-container
     image: mongo:3
     restart: always
     volumes:
@@ -17,6 +17,6 @@ services:
     volumes: 
       - ./dist:/usr/src/clean-node-api/dist
     ports: 
-      - "5050"
+      - "5050:5050"
     links:
       - mongo
