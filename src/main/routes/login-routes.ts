@@ -1,7 +1,7 @@
-import { makeLoginController } from './../factories/controllers/login/login-factory'
-import { Router } from 'express'
-import { makeSignUpController } from '../factories/controllers/signup/signup'
+import { makeLoginController } from '../factories/controllers/login/login-controller-factory'
+import { makeSignUpController } from '../factories/controllers/signup/signup-controller-factory'
 import { adaptRoute } from '../adapter/express/express-route-adapter'
+import { Router } from 'express'
 
 export default (router: Router): void => {
   router.post('/signup', adaptRoute(makeSignUpController()))
