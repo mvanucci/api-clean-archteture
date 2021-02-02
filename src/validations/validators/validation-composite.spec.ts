@@ -1,5 +1,6 @@
-import { MissingParamsErrors } from './../../errors/MissingParamsErrors'
-import { Validation } from '../../protocols/validation'
+
+import { MissingParamsErrors } from '../../presentation/errors'
+import { Validation } from '../../presentation/protocols/validation'
 import { ValidationComposite } from './validation-composite'
 
 interface SutTypes {
