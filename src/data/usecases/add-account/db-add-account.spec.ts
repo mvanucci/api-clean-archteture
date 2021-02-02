@@ -1,6 +1,5 @@
 import { DbAddAccount } from '../add-account/db-add-account'
-import { LoadAccountByEmailRepository } from '../authentication/db-authentication-protocols'
-import { Hasher, AccountModel, AddAccountModel, AddAccountRepository } from './db-add-account-protocols'
+import { Hasher, AccountModel, AddAccountModel, AddAccountRepository, LoadAccountByEmailRepository } from './db-add-account-protocols'
 
 interface SutType {
   sut: DbAddAccount
@@ -69,7 +68,6 @@ describe('DbAddAccount Usecase', () => {
   test('Should call Hasher with correct password', async () => {
     const { sut, hasherStub } = makeSut()
     const hashSpy = jest.spyOn(hasherStub, 'hash')
-
     await sut.add(makeFakeAccountData())
     expect(hashSpy).toHaveBeenCalledWith('valid_password')
   })
@@ -104,10 +102,16 @@ describe('DbAddAccount Usecase', () => {
 
   test('Should return an account on success ', async () => {
     const { sut } = makeSut()
-
     const account = await sut.add(makeFakeAccount())
     expect(account).toEqual(makeFakeAccount())
   })
+
+  // test('Should return an null if LoadAccountByEmailRepository returns null ', async () => {
+  //   const { sut, loadAccountByEmailRepositoryStub } = makeSut()
+  //   jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(new Promise(resolve => resolve(makeFakeAccount())))
+  //   const account = await sut.add(makeFakeAccountData())
+  //   expect(account).toBeNull()
+  // })
 
   test('should call LoadAccountByEmailRepository with correct email', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
