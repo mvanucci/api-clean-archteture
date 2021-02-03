@@ -1,9 +1,9 @@
-import { forbidden } from './../../helpers/http/HttpHelpers'
-import { Authentication } from './../../../domain/usecases/authentication'
+import { forbidden } from './../../../helpers/http/HttpHelpers'
+import { Authentication } from './../../../../domain/usecases/authentication'
 import { HttpResponse, HttpRequest, Controller, AddAccount } from './signup-protocols'
-import { badRequest, serverError, Ok } from '../../helpers/http/HttpHelpers'
-import { Validation } from '../../protocols/validation'
-import { EmailInUseError } from '../../errors'
+import { badRequest, serverError, Ok } from '../../../helpers/http/HttpHelpers'
+import { Validation } from '../../../protocols/validation'
+import { EmailInUseError } from '../../../errors'
 
 export class SignUpController implements Controller {
   private readonly addAccount: AddAccount
