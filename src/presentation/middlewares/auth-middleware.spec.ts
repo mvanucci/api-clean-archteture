@@ -2,7 +2,7 @@ import { HttpRequest } from './../protocols/http'
 import { LoadAccountByToken } from './../../domain/usecases/LoadAccountByToken'
 import { AuthMiddleware } from './auth-middleware'
 import { AccessDeniedError } from './../errors/AccessDeniedError'
-import { forbidden, Ok } from './../helpers/http/HttpHelpers'
+import { forbidden, Ok, serverError } from './../helpers/http/HttpHelpers'
 import { AccountModel } from '../../domain/models/AccountModel'
 
 const makeFakeAccount = (): AccountModel => ({
@@ -66,5 +66,12 @@ describe('Auth Middleware', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(Ok({ accountId: 'valid_id' }))
+  })
+
+  test('should return 500 if LoadAccountByToken throws', async () => {
+    const { sut , loadAccountByTokenStub } = makeSut()
+    jest.spyOn(loadAccountByTokenStub, 'load').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
