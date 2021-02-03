@@ -2,7 +2,7 @@ import { HttpRequest } from './../protocols/http'
 import { LoadAccountByToken } from './../../domain/usecases/LoadAccountByToken'
 import { AuthMiddleware } from './auth-middleware'
 import { AccessDeniedError } from './../errors/AccessDeniedError'
-import { forbidden } from './../helpers/http/HttpHelpers'
+import { forbidden, Ok } from './../helpers/http/HttpHelpers'
 import { AccountModel } from '../../domain/models/AccountModel'
 
 const makeFakeAccount = (): AccountModel => ({
@@ -60,5 +60,11 @@ describe('Auth Middleware', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(forbidden(new AccessDeniedError()))
+  })
+
+  test('should return 200 if LoadAccountByToken returns an account', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(Ok({ accountId: 'valid_id' }))
   })
 })
