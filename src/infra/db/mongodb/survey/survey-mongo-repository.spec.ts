@@ -20,21 +20,22 @@ describe('Account Mongo Repository', () => {
   const makeSut = (): SurveyMongoRepository => {
     return new SurveyMongoRepository()
   }
+  describe('add()', () => {
+    test('should return an account on add success', async () => {
+      const sut = makeSut()
 
-  test('should return an account on add success', async () => {
-    const sut = makeSut()
-
-    await sut.add({
-      question: 'any_question',
-      answers: [{
-        image: 'any_image',
-        answer: 'any_anwser'
-      }, {
-        answer: 'other_anwser'
-      }],
-      date: new Date()
+      await sut.add({
+        question: 'any_question',
+        answers: [{
+          image: 'any_image',
+          answer: 'any_anwser'
+        }, {
+          answer: 'other_anwser'
+        }],
+        date: new Date()
+      })
+      const survey = await surveyCollection.findOne({ question: 'any_question' })
+      expect(survey).toBeTruthy()
     })
-    const survey = await surveyCollection.findOne({ question: 'any_question' })
-    expect(survey).toBeTruthy()
   })
 })
