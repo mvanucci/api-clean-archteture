@@ -1,5 +1,5 @@
-import { AccountModel } from '../../../../domain/models/AccountModel'
+import { SurveyAnswer } from '../../../../domain/models/SurveyModel'
 
 export interface LoadAccountByEmailRepository {
-  loadByEmail: (email: string) => Promise<AccountModel>
+  loadByEmail: (email: string) => Promise<SurveyAnswer>
 }

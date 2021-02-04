@@ -1,5 +1,5 @@
 export * from './../../../domain/usecases/AddAccount'
-export * from '../../../domain/models/AccountModel'
+export * from '../../../domain/models/SurveyModel'
 export * from '../../protocols/criptografy/hasher'
 export * from '../../protocols/db/account/add-account-repository'
 export * from '../../protocols/db/account/load-account-by-email-repository'
