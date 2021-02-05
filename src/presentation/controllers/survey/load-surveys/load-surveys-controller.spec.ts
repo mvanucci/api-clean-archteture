@@ -1,5 +1,4 @@
-import { noContent, Ok, serverError } from './../../../helpers/http/HttpHelpers'
-
+import { noContent, Ok, serverError } from '@/presentation/helpers/http/HttpHelpers'
 import { LoadSurveys, SurveyModel } from './load-survey-controller-protocols'
 import { LoadSurveysController } from './load-surveys-controller'
 import MockDate from 'mockdate'

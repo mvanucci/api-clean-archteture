@@ -1,20 +1,15 @@
-import { forbidden } from './../../../helpers/http/HttpHelpers'
-import { Authentication } from './../../../../domain/usecases/authentication'
+import { Authentication } from '@/domain/usecases/authentication'
 import { HttpResponse, HttpRequest, Controller, AddAccount } from './signup-protocols'
-import { badRequest, serverError, Ok } from '../../../helpers/http/HttpHelpers'
-import { Validation } from '../../../protocols/validation'
-import { EmailInUseError } from '../../../errors'
+import { badRequest, serverError, Ok, forbidden } from '@/presentation/helpers/http/HttpHelpers'
+import { Validation } from '@/presentation/protocols/validation'
+import { EmailInUseError } from '@/presentation/errors'
 
 export class SignUpController implements Controller {
-  private readonly addAccount: AddAccount
-  private readonly validation: Validation
-  private readonly authentication: Authentication
-
-  constructor (addAccount: AddAccount, validation: Validation, authentication: Authentication) {
-    this.addAccount = addAccount
-    this.validation = validation
-    this.authentication = authentication
-  }
+  constructor (
+    private readonly addAccount: AddAccount,
+    private readonly validation: Validation,
+    private readonly authentication: Authentication
+  ) { }
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
