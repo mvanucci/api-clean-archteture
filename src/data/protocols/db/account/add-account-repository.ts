@@ -1,4 +1,4 @@
-import { AccountModel } from '../../../../domain/models/SurveyModel'
+import { AccountModel } from '../../../../domain/models/AccountModel'
 import { AddAccountModel } from '../../../../domain/usecases/AddAccount'
 
 export interface AddAccountRepository {
