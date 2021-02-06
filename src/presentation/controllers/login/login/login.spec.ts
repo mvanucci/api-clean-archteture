@@ -3,7 +3,7 @@ import { MissingParamsErrors } from '@/presentation/errors'
 import { badRequest, Ok, serverError, unauthorized } from '@/presentation/helpers/http/HttpHelpers'
 import { LoginController } from './login'
 
-interface SutTypes {
+type SutTypes = {
   sut: LoginController
   authenticationStub: Authentication
   validationStub: Validation
