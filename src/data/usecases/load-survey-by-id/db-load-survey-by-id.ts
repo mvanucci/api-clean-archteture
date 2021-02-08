@@ -8,7 +8,7 @@ export class DbLoadSurveyById implements LoadSurveyById {
   ) { }
 
   async loadById (id: string): Promise<SurveyModel> {
-    await this.loadSurveyByIdRepositoryStub.loadById(id)
-    return null
+    const survey = await this.loadSurveyByIdRepositoryStub.loadById(id)
+    return survey
   }
 }
