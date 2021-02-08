@@ -47,11 +47,18 @@ describe('DbAddSurvey UseCase', () => {
   afterAll(() => {
     MockDate.reset()
   })
-  test('should call AddSurveyRepository', async () => {
+  test('should call SaveSurveyRepository', async () => {
     const { sut, saveDbSurveyResultRepositoryStub } = makeSut()
     const saveSpy = jest.spyOn(saveDbSurveyResultRepositoryStub, 'save')
     const surveyResultData = makeFakeSurveyRestultData()
     await sut.save(surveyResultData)
     expect(saveSpy).toHaveBeenCalledWith(surveyResultData)
+  })
+
+  test('Should throw if SaveSurveyRepository with throws', async () => {
+    const { sut, saveDbSurveyResultRepositoryStub } = makeSut()
+    jest.spyOn(saveDbSurveyResultRepositoryStub, 'save').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.save(makeFakeSurveyRestultData())
+    await expect(promise).rejects.toThrow()
   })
 })
