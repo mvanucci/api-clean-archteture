@@ -1,8 +1,8 @@
 import { makeAddSurveyValidation } from './add-survey-validation'
-import { Validation } from '../../../../../presentation/protocols/validation'
-import { RequiredFieldValidation, ValidationComposite } from '../../../../../validations/validators'
+import { Validation } from '@/presentation/protocols/validation'
+import { RequiredFieldValidation, ValidationComposite } from '@/validations/validators'
 
-jest.mock('../../../../../validations/validators/validation-composite')
+jest.mock('@/validations/validators/validation-composite')
 
 describe('AddSurveyValidation Factory', () => {
   test('should call ValidationComposite with all validations', () => {
