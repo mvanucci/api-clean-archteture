@@ -1,7 +1,7 @@
 import { HttpRequest } from '@/presentation/protocols/http'
 import { SignUpController } from './SignUpController'
 import { EmailInUseError, MissingParamsErrors, ServerError } from '@/presentation/errors'
-import { AccountModel, AddAccount, AddAccountModel, Validation, Authentication, AuthenticationModel } from './signup-protocols'
+import { AccountModel, AddAccount, AddAccountParams, Validation, Authentication, AuthenticationParams } from './signup-protocols'
 import { badRequest, Ok, serverError, forbidden } from '@/presentation/helpers/http/HttpHelpers'
 
 type SutTypes = {
@@ -20,7 +20,7 @@ const makeFakerRequest = (): HttpRequest => ({
 
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async auth (authentication: AuthenticationModel): Promise<string> {
+    async auth (authentication: AuthenticationParams): Promise<string> {
       return new Promise(resolve => resolve('any_token'))
     }
   }
@@ -38,7 +38,7 @@ const makeFakeRequest = (): HttpRequest => ({
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
-    async add (account: AddAccountModel): Promise<AccountModel> {
+    async add (account: AddAccountParams): Promise<AccountModel> {
       return new Promise(resolve => resolve(makeFakeAccount()))
     }
   }

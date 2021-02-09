@@ -1,6 +1,6 @@
 import { AccountModel } from '@/domain/models/AccountModel'
-import { AddAccountModel } from '@/domain/usecases/AddAccount'
+import { AddAccountParams } from '@/domain/usecases/AddAccount'
 
 export interface AddAccountRepository {
-  add: (accountData: AddAccountModel) => Promise<AccountModel>
+  add: (accountData: AddAccountParams) => Promise<AccountModel>
 }
