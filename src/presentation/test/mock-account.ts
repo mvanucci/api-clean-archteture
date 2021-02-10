@@ -4,7 +4,7 @@ import { AccountModel, LoadAccountByToken } from '@/presentation/middlewares/aut
 export const mockLoadAccountByToken = (): LoadAccountByToken => {
   class LoadAccountByTokenStub implements LoadAccountByToken {
     async load (accessToken: string, hole?: string): Promise<AccountModel> {
-      return new Promise(resolve => resolve(mockAccount()))
+      return Promise.resolve(mockAccount())
     }
   }
   return new LoadAccountByTokenStub()

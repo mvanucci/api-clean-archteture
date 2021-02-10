@@ -12,7 +12,7 @@ import { mockSurveyModelRestult } from '@/domain/test'
 export const mockAddDbSurveyReposity = (): AddSurveyRepository => {
   class AddDbSurveyRepositoryStub implements AddSurveyRepository {
     async add (surveyData: AddSurveyParams): Promise<void> {
-      return new Promise(resolve => resolve())
+      return Promise.resolve()
     }
   }
   return new AddDbSurveyRepositoryStub()
@@ -21,7 +21,7 @@ export const mockAddDbSurveyReposity = (): AddSurveyRepository => {
 export const mockLoadSurveyByIdRepositoryStub = (): LoadSurveyByIdRepository => {
   class LoadSurveyByIdRepositoryStub implements LoadSurveyByIdRepository {
     async loadById (id: string): Promise<SurveyModel> {
-      return new Promise(resolve => resolve(mockSurveyModel()))
+      return Promise.resolve(mockSurveyModel())
     }
   }
   return new LoadSurveyByIdRepositoryStub()
@@ -30,7 +30,7 @@ export const mockLoadSurveyByIdRepositoryStub = (): LoadSurveyByIdRepository => 
 export const mockLoadSurveyRepository = (): LoadSurveyRepository => {
   class LoadSurveysRepositoryStub implements LoadSurveyRepository {
     async loadAll (): Promise<SurveyModel[]> {
-      return new Promise(resolve => resolve(mockSurveyModels()))
+      return Promise.resolve(mockSurveyModels())
     }
   }
   return new LoadSurveysRepositoryStub()
@@ -39,7 +39,7 @@ export const mockLoadSurveyRepository = (): LoadSurveyRepository => {
 export const mockDbSurveyResultRepository = (): SaveSurveyResultRepository => {
   class DaveDbSurveyResultRepositoryStub implements SaveSurveyResultRepository {
     async save (data: SaveSurveyResultParams): Promise<SurveyResultModel> {
-      return new Promise(resolve => resolve(mockSurveyModelRestult()))
+      return Promise.resolve(mockSurveyModelRestult())
     }
   }
   return new DaveDbSurveyResultRepositoryStub()

@@ -1,7 +1,7 @@
 import { DbAddAccount } from '@/data/usecases/account/add-account/db-add-account'
-import { Hasher, AccountModel, AddAccountRepository, LoadAccountByEmailRepository } from './db-add-account-protocols'
+import { Hasher, AddAccountRepository, LoadAccountByEmailRepository } from './db-add-account-protocols'
 import { mockAccount, mockAccountParams, throwError } from '@/domain/test'
-import { mockAddAccountRepository, mockHasher } from '@/data/test'
+import { mockAddAccountRepository, mockHasher, mockLoadAccountByEmailRepository } from '@/data/test'
 
 interface SutType {
   sut: DbAddAccount
@@ -10,18 +10,9 @@ interface SutType {
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
 }
 
-const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
-  class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
-    async loadByEmail (email: string): Promise<AccountModel> {
-      return new Promise(resolve => resolve(null))
-    }
-  }
-
-  return new LoadAccountByEmailRepositoryStub()
-}
-
 const makeSut = (): SutType => {
-  const loadAccountByEmailRepositoryStub = makeLoadAccountByEmailRepository()
+  const loadAccountByEmailRepositoryStub = mockLoadAccountByEmailRepository()
+  jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockReturnValue(Promise.resolve(null))
   const addAccountRepositoryStub = mockAddAccountRepository()
   const hasherStub = mockHasher()
   const sut = new DbAddAccount(hasherStub, addAccountRepositoryStub, loadAccountByEmailRepositoryStub)
@@ -76,7 +67,7 @@ describe('DbAddAccount Usecase', () => {
 
   test('Should return an null if LoadAccountByEmailRepository returns null ', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
-    jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(new Promise(resolve => resolve(mockAccount())))
+    jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(Promise.resolve(mockAccount()))
     const account = await sut.add(mockAccountParams())
     expect(account).toBeNull()
   })
