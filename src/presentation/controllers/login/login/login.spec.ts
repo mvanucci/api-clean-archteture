@@ -1,21 +1,14 @@
-import { HttpRequest, Authentication, Validation, AuthenticationParams } from './login-protocols'
+import { HttpRequest, Authentication, Validation } from './login-protocols'
 import { MissingParamsErrors } from '@/presentation/errors'
 import { badRequest, Ok, serverError, unauthorized } from '@/presentation/helpers/http/HttpHelpers'
 import { LoginController } from './login'
+import { throwError } from '@/domain/test'
+import { mockAuthentication, mockValidation } from '@/presentation/test'
 
 type SutTypes = {
   sut: LoginController
   authenticationStub: Authentication
   validationStub: Validation
-}
-
-const makeAuthentication = (): Authentication => {
-  class AuthenticationStub implements Authentication {
-    async auth (authentication: AuthenticationParams): Promise<string> {
-      return new Promise(resolve => resolve('any_token'))
-    }
-  }
-  return new AuthenticationStub()
 }
 
 const makeFakerRequest = (): HttpRequest => ({
@@ -34,18 +27,9 @@ const makeFakeRequest = (): HttpRequest => ({
   }
 })
 
-const makeValidation = (): Validation => {
-  class ValidationStub implements Validation {
-    validate (input: any): Error {
-      return null
-    }
-  }
-  return new ValidationStub()
-}
-
 const makeSut = (): SutTypes => {
-  const authenticationStub = makeAuthentication()
-  const validationStub = makeValidation()
+  const authenticationStub = mockAuthentication()
+  const validationStub = mockValidation()
   const sut = new LoginController(authenticationStub, validationStub)
   return {
     sut,
@@ -74,7 +58,7 @@ describe('LoginController', () => {
 
   test('should return 500 if Authentication throws', async () => {
     const { sut, authenticationStub } = makeSut()
-    jest.spyOn(authenticationStub, 'auth').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    jest.spyOn(authenticationStub, 'auth').mockImplementationOnce(throwError)
     const httpResponse = await sut.handle(makeFakerRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })

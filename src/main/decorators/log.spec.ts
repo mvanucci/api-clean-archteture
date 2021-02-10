@@ -1,4 +1,5 @@
 import { LogErrorRepository } from '@/data/protocols/db/log/log-error-repository'
+import { mockLogErrorRepository } from '@/data/test'
 import { AccountModel } from '@/domain/models/AccountModel'
 import { serverError, Ok } from '@/presentation/helpers/http/HttpHelpers'
 import { Controller, HttpRequest, HttpResponse } from '@/presentation/protocols'
@@ -19,7 +20,7 @@ const makeFakeRequest = (): HttpRequest => ({
   }
 })
 
-const makeFakeAccount = (): AccountModel => ({
+const mockAccount = (): AccountModel => ({
   id: 'valid_id',
   name: 'valid_name',
   email: 'valid_email@mail.com',
@@ -35,23 +36,15 @@ const makeFakeServerError = (): HttpResponse => {
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
     async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-      return new Promise(resolve => resolve(Ok(makeFakeAccount())))
+      return new Promise(resolve => resolve(Ok(mockAccount())))
     }
   }
   return new ControllerStub()
 }
-const makeLogErrorRepository = (): LogErrorRepository => {
-  class LogErrorRepositoryStub implements LogErrorRepository {
-    async logError (stackError: string): Promise<void> {
-      return new Promise(resolve => resolve())
-    }
-  }
-  return new LogErrorRepositoryStub()
-}
 
 const makeSut = (): SutTypes => {
   const controllerStub = makeController()
-  const logErrorRepositoryStub = makeLogErrorRepository()
+  const logErrorRepositoryStub = mockLogErrorRepository()
   const sut = new LogControllerDecorator(controllerStub, logErrorRepositoryStub)
   return {
     sut,
@@ -71,7 +64,7 @@ describe('LogController Decorator', () => {
   test('should return the same result of the controller', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(Ok(makeFakeAccount()))
+    expect(httpResponse).toEqual(Ok(mockAccount()))
   })
   test('should call LogErrorRepository with correct error if controller returns a server error', async () => {
     const { sut, controllerStub, logErrorRepositoryStub } = makeSut()
