@@ -1,3 +1,4 @@
+import { addSurveySchema } from './schemas/add-survey-schema'
 import {
   badRequest,
   serverError,
@@ -49,7 +50,8 @@ export default {
     surveys: surveysSchema,
     survey: surveySchema,
     surveyAnswer: surveyAnswerSchema,
-    signupParams: signupParamsSchema
+    signupParams: signupParamsSchema,
+    addSurveyParams: addSurveySchema
   },
   components: {
     securitySchemes: {
