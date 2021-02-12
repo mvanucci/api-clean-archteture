@@ -3,7 +3,7 @@ import { InvalidParamError } from '@/presentation/errors/InvalidParamError'
 import { forbidden, Ok, serverError } from '@/presentation/helpers/http/HttpHelpers'
 import { HttpRequest, LoadSurveyById, SaveSurveyResult } from './save-survey-result-controller-protocols'
 import { SaveSurveyResultController } from './save-survey-result-controller'
-import { throwError, mockSaveSurveyModelRestultParams } from '@/domain/test'
+import { mockSurveyResultModel, throwError } from '@/domain/test'
 import { mockLoadSurveyById, mockSaveSurveyResult } from '@/presentation/test'
 
 const makeFakeRequest = (): HttpRequest => ({
@@ -86,7 +86,7 @@ describe('SaveSurveyResult Controller', () => {
     expect(saveSpy).toHaveBeenCalledWith({
       surveyId: 'any_survey_id',
       accountId: 'any_account_id',
-      date: new Date(),
+      data: new Date(),
       answer: 'any_answer'
     })
   })
@@ -101,6 +101,6 @@ describe('SaveSurveyResult Controller', () => {
   test('should returns 200 on success', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(Ok(mockSaveSurveyModelRestultParams()))
+    expect(httpResponse).toEqual(Ok(mockSurveyResultModel()))
   })
 })

@@ -48,7 +48,7 @@ describe('Survey Routes', () => {
         })
         .expect(403)
     })
-    test('should return 200 on save Survey Result without accessToken', async () => {
+    test('should return 200 on save Survey Result with accessToken', async () => {
       const accessToken = await makeAccessToken()
       const res = await surveyCollection.insertOne({
         question: 'Question',

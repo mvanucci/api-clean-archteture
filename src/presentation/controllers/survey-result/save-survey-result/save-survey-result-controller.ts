@@ -27,7 +27,7 @@ export class SaveSurveyResultController implements Controller {
         accountId: accountId,
         surveyId: surveyId,
         answer,
-        date: new Date()
+        data: new Date()
       })
       return Ok(surveyRestul)
     } catch (error) {

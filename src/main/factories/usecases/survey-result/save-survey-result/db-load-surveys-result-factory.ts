@@ -4,5 +4,6 @@ import { SaveSurveyResult } from '@/domain/usecases/survey-result/SaveSurveyResu
 
 export const makeDbSaveSurveysResult = (): SaveSurveyResult => {
   const surveyResultMongoRepository = new SurveyResultMongoRepository()
-  return new DbSaveSurveyResult(surveyResultMongoRepository)
+
+  return new DbSaveSurveyResult(surveyResultMongoRepository, surveyResultMongoRepository)
 }

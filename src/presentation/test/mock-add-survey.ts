@@ -1,4 +1,4 @@
-import { mockSaveSurveyModelRestultParams, mockSurveyModel, mockSurveyModels } from '@/domain/test'
+import { mockSurveyModel, mockSurveyModels, mockSurveyResultModel } from '@/domain/test'
 import { AddSurvey, AddSurveyParams } from '@/presentation/controllers/survey/add-survey/add-survey-controller-protocols'
 import { LoadSurveyById, SaveSurveyResult, SaveSurveyResultParams, SurveyResultModel } from '../controllers/survey-result/save-survey-result/save-survey-result-controller-protocols'
 import { LoadSurveys, SurveyModel } from '../controllers/survey/load-surveys/load-survey-controller-protocols'
@@ -34,7 +34,7 @@ export const mockLoadSurveyById = (): LoadSurveyById => {
 export const mockSaveSurveyResult = (): SaveSurveyResult => {
   class SaveSurveyResultStub implements SaveSurveyResult {
     async save (account: SaveSurveyResultParams): Promise<SurveyResultModel> {
-      return Promise.resolve(mockSaveSurveyModelRestultParams())
+      return Promise.resolve(mockSurveyResultModel())
     }
   }
   return new SaveSurveyResultStub()
