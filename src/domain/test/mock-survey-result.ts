@@ -6,7 +6,7 @@ export const mockSaveSurveyResultParams = (): SaveSurveyResultParams => ({
   accountId: 'any_account_id',
   surveyId: 'any_survey_id',
   answer: 'any_answer',
-  data: new Date()
+  date: new Date()
 })
 
 export const mockSurveyResultModel = (): SurveyResultModel => ({
@@ -16,7 +16,7 @@ export const mockSurveyResultModel = (): SurveyResultModel => ({
     answer: 'any_answer',
     count: 0,
     percent: 0
-  },{
+  }, {
     answer: 'other_answer',
     image: 'any_image',
     count: 0,

@@ -1,4 +1,4 @@
-import { LoadSurveyByIdRepository } from '@/data/protocols/db/survey/load-survey-by-id-repository '
+import { LoadSurveyByIdRepository } from '@/data/protocols/db/survey/load-survey-by-id-repository'
 import { SurveyModel } from '@/domain/models/SurveyModel'
 import { LoadSurveyRepository } from '@/data/protocols/db/survey/load-survey-repository'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongodb-helper'

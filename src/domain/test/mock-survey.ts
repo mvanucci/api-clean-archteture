@@ -3,7 +3,7 @@ import { SurveyModel } from '@/domain/models/SurveyModel'
 
 export const mockSurveyModel = (): SurveyModel => {
   return {
-    id: 'any_id',
+    id: 'any_survey_id',
     question: 'any_question',
     answers: [{
       image: 'any_image',

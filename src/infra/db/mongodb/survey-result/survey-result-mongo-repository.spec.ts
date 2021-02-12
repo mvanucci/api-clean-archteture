@@ -63,7 +63,7 @@ describe('Account Mongo Repository', () => {
         surveyId: survey.id,
         accountId: account.id,
         answer: survey.answers[0].answer,
-        data: new Date()
+        date: new Date()
       })
       const surveyResult = await surveyResultCollection.findOne({
         surveyId: survey.id,
@@ -77,8 +77,8 @@ describe('Account Mongo Repository', () => {
       const account = await makeAccount()
 
       await surveyResultCollection.insertOne({
-        surveyId: survey.id,
-        accountId: account.id,
+        surveyId: new ObjectId(survey.id),
+        accountId: new ObjectId(account.id),
         answer: survey.answers[0].answer,
         date: new Date()
       })
@@ -88,7 +88,7 @@ describe('Account Mongo Repository', () => {
         surveyId: survey.id,
         accountId: account.id,
         answer: survey.answers[1].answer,
-        data: new Date()
+        date: new Date()
       })
 
       const surveyResult = await surveyResultCollection
@@ -128,10 +128,11 @@ describe('Account Mongo Repository', () => {
       }])
       const sut = makeSut()
       const surveyResult = await sut.loadBySurveyId(survey.id)
-      expect(surveyResult).toBeTruthy()
       expect(surveyResult.surveyId).toEqual(survey.id)
       expect(surveyResult.answers[0].count).toBe(2)
       expect(surveyResult.answers[0].percent).toBe(50)
+      expect(surveyResult.answers[1].count).toBe(2)
+      expect(surveyResult.answers[1].percent).toBe(50)
     })
   })
 })

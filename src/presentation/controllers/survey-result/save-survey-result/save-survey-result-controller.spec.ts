@@ -86,7 +86,7 @@ describe('SaveSurveyResult Controller', () => {
     expect(saveSpy).toHaveBeenCalledWith({
       surveyId: 'any_survey_id',
       accountId: 'any_account_id',
-      data: new Date(),
+      date: new Date(),
       answer: 'any_answer'
     })
   })
