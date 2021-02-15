@@ -2,40 +2,46 @@ import { Encrypter } from '@/data/protocols/criptografy/encrypter'
 import { Decrypter } from '@/data/protocols/criptografy/decrypter'
 import { Hasher } from '@/data/protocols/criptografy/hasher'
 import { HashCompare } from '@/data/usecases/account/authentication/db-authentication-protocols'
+import faker from 'faker'
 
-export const mockHasher = (): Hasher => {
-  class HasherStub implements Hasher {
-    async hash (value: string): Promise<string> {
-      return Promise.resolve('hashed_password')
-    }
+export class HasherSpy implements Hasher {
+  digest = faker.random.uuid()
+  plaintext: string
+
+  async hash (plaintext: string): Promise<string> {
+    this.plaintext = plaintext
+    return Promise.resolve(this.digest)
   }
-
-  return new HasherStub()
 }
 
-export const mockDecrypter = (): Decrypter => {
-  class DecrypterStub implements Decrypter {
-    async decrypt (token: string): Promise<string> {
-      return Promise.resolve('any_value')
-    }
+export class DecrypterSpy implements Decrypter {
+  plaintext = faker.internet.password()
+  ciphertext: string
+
+  async decrypt (ciphertext: string): Promise<string> {
+    this.ciphertext = ciphertext
+    return this.plaintext
   }
-  return new DecrypterStub()
 }
 
-export const mockEncrypter = (): Encrypter => {
-  class EncrypterStub implements Encrypter {
-    async encrypt (value: string): Promise<string> {
-      return Promise.resolve('any_token')
-    }
+export class HashComparerSpy implements HashCompare {
+  plaintext: string
+  digest: string
+  isValid = true
+
+  async compare (plaintext: string, digest: string): Promise<boolean> {
+    this.plaintext = plaintext
+    this.digest = digest
+    return this.isValid
   }
-  return new EncrypterStub()
 }
 
-export const mockHashCompare = (): HashCompare => {
-  class HashCompareStub implements HashCompare {
-    async compare (value: string, hash: string): Promise<boolean> {
-      return Promise.resolve(true)
-    }
+export class EncrypterSpy implements Encrypter {
+  ciphertext = faker.random.uuid()
+  plaintext: string
+
+  async encrypt (plaintext: string): Promise<string> {
+    this.plaintext = plaintext
+    return this.ciphertext
   }
-  return new HashCompareStub()
 }
