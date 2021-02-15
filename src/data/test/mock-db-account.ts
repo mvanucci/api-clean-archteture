@@ -1,8 +1,10 @@
-
-import { UpdateAccessTokenRepository } from './../protocols/db/account/update-access-token-repository'
+import { AddAccountRepository } from '@/data/protocols/db/account/add-account-repository'
+import { LoadAccountByEmailRepository } from '@/data/protocols/db/account/load-account-by-email-repository'
+import { LoadAccountByTokenRepository } from '@/data/protocols/db/account/load-account-by-token-repository'
+import { UpdateAccessTokenRepository } from '@/data/protocols/db/account/update-access-token-repository'
+import { AddAccountParams } from '@/domain/usecases/account/AddAccount'
+import { AccountModel } from '@/domain/models/AccountModel'
 import { mockAccountModel } from '@/domain/test'
-import { AccountModel, AddAccount, AddAccountParams, AddAccountRepository, LoadAccountByEmailRepository } from '@/data/usecases/account/add-account/db-add-account-protocols'
-import { LoadAccountByTokenRepository } from '../protocols/db/account/load-account-by-token-repository'
 
 export class AddAccountRepositorySpy implements AddAccountRepository {
   accountModel = mockAccountModel()
@@ -10,17 +12,8 @@ export class AddAccountRepositorySpy implements AddAccountRepository {
 
   async add (data: AddAccountParams): Promise<AccountModel> {
     this.addAccountParams = data
-    return Promise.resolve(this.accountModel)
+    return this.accountModel
   }
-}
-
-export const mockAddAccount = (): AddAccount => {
-  class AddAccountStub implements AddAccount {
-    async add (account: AddAccountParams): Promise<AccountModel> {
-      return Promise.resolve(mockAccountModel())
-    }
-  }
-  return new AddAccountStub()
 }
 
 export class LoadAccountByEmailRepositorySpy implements LoadAccountByEmailRepository {
@@ -43,15 +36,6 @@ export class LoadAccountByTokenRepositorySpy implements LoadAccountByTokenReposi
     this.role = role
     return this.accountModel
   }
-}
-
-export const mockUpdateAccessTokenRepository = (): UpdateAccessTokenRepository => {
-  class UpdateAccessTokenRepositoryStub implements UpdateAccessTokenRepository {
-    async updateAccessToken (id: string, token: string): Promise<void> {
-      return Promise.resolve()
-    }
-  }
-  return new UpdateAccessTokenRepositoryStub()
 }
 
 export class UpdateAccessTokenRepositorySpy implements UpdateAccessTokenRepository {

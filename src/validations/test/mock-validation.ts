@@ -1,10 +1,11 @@
-import { Validation } from '@/presentation/protocols'
+import { EmailValidator } from '@/validations/protocols/EmailValidator'
 
-export const mockValidation = (): Validation => {
-  class ValidationStub implements Validation {
-    validate (input: any): Error {
-      return null
-    }
+export class EmailValidatorSpy implements EmailValidator {
+  isEmailValid = true
+  email: string
+
+  isValid (email: string): boolean {
+    this.email = email
+    return this.isEmailValid
   }
-  return new ValidationStub()
 }
