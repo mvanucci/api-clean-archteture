@@ -1,4 +1,4 @@
-import { AddSurvey, AddSurveyParams } from '@/domain'
+import { AddSurvey } from '@/domain'
 import { AddSurveyRepository } from '@/data'
 
 export class DbAddSurvey implements AddSurvey {
@@ -6,7 +6,7 @@ export class DbAddSurvey implements AddSurvey {
     private readonly addSurveyRepository: AddSurveyRepository
   ) {}
 
-  async add (data: AddSurveyParams): Promise<void> {
+  async add (data: AddSurvey.Params): Promise<void> {
     await this.addSurveyRepository.add(data)
   }
 }
