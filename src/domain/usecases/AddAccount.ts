@@ -1,4 +1,3 @@
-import { AccountModel } from '@/domain'
 
 export interface AddAccount {
   add: (account: AddAccount.Params) => Promise<AddAccount.Result>
