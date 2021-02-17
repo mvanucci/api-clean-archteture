@@ -1,0 +1,11 @@
+import { SurveyResultModel } from '@/domain'
+
+export type SaveSurveyResultParams = {
+  surveyId: string
+  accountId: string
+  answer: string
+  date: Date
+}
+export interface SaveSurveyResult {
+  save: (account: SaveSurveyResultParams) => Promise<SurveyResultModel>
+}

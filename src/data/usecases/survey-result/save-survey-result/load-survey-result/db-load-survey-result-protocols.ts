@@ -1,5 +1,0 @@
-export * from '@/domain/usecases/survey-result/LoadSurveyResult'
-export * from '@/domain/models/SurveyResult'
-export * from '@/data/protocols/db/survey-result/load-survey-result-repository'
-export * from '@/data/protocols/db/survey/load-survey-repository'
-export * from '@/data/protocols/db/survey/load-survey-by-id-repository'

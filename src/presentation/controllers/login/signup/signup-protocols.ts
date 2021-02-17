@@ -1,5 +1,0 @@
-export * from '@/presentation/protocols'
-export * from '@/domain/usecases/account/AddAccount'
-export * from '@/domain/models/SurveyModel'
-export * from '@/domain/models/AccountModel'
-export * from '@/domain/usecases/account/authentication'
