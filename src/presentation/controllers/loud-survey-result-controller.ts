@@ -1,6 +1,9 @@
-import { Controller, HttpRequest, HttpResponse, LoadSurveyById, LoadSurveyResult } from './'
+
 import { forbidden, serverError, Ok } from '@/presentation/helpers/HttpHelpers'
 import { InvalidParamError } from '@/presentation/errors'
+
+import { Controller, HttpResponse } from '@/presentation/protocols'
+import { LoadSurveyById, LoadSurveyResult } from '@/domain'
 
 export class LoadSurveyResultController implements Controller {
   constructor (
@@ -8,17 +11,24 @@ export class LoadSurveyResultController implements Controller {
     private readonly loadSurveyResult: LoadSurveyResult
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (request: LoadSurveyResultController.Request): Promise<HttpResponse> {
     try {
-      const { surveyId } = httpRequest.params
+      const { surveyId } = request
       const survey = await this.loadSurveyById.loadById(surveyId)
       if (!survey) {
         return forbidden(new InvalidParamError('surveyId'))
       }
-      const surveyResult = await this.loadSurveyResult.load(surveyId, httpRequest.accountId)
+      const surveyResult = await this.loadSurveyResult.load(surveyId, request.accountId)
       return Ok(surveyResult)
     } catch (error) {
       return serverError(error)
     }
+  }
+}
+
+export namespace LoadSurveyResultController {
+  export type Request = {
+    surveyId: string
+    accountId: string
   }
 }

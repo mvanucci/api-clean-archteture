@@ -1,4 +1,3 @@
-import { HttpRequest } from '@/presentation/protocols/http'
 import { LoadSurveysController } from '@/presentation/controllers'
 import { Ok, serverError, noContent } from '@/presentation/helpers/HttpHelpers'
 import { LoadSurveysSpy } from '@/tests/presentation/mock'
@@ -11,7 +10,7 @@ type SutTypes = {
   loadSurveysSpy: LoadSurveysSpy
 }
 
-const mockRequest = (): HttpRequest => ({ accountId: faker.random.uuid() })
+const mockRequest = (): LoadSurveysController.Request => ({ accountId: faker.random.uuid() })
 
 const makeSut = (): SutTypes => {
   const loadSurveysSpy = new LoadSurveysSpy()

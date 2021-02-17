@@ -1,6 +1,7 @@
 import { InvalidParamError } from '@/presentation/errors/InvalidParamError'
 import { forbidden, Ok, serverError } from '@/presentation/helpers/HttpHelpers'
-import { HttpResponse, Controller, HttpRequest, LoadSurveyById, SaveSurveyResult } from './'
+import { LoadSurveyById, SaveSurveyResult } from '@/domain'
+import { Controller, HttpResponse } from '@/presentation/protocols'
 
 export class SaveSurveyResultController implements Controller {
   constructor (
@@ -8,11 +9,9 @@ export class SaveSurveyResultController implements Controller {
     private readonly saveSurveyResult: SaveSurveyResult
   ) { }
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (request: SaveSurveyResultController.Request): Promise<HttpResponse> {
     try {
-      const { surveyId } = httpRequest.params
-      const { accountId } = httpRequest
-      const { answer } = httpRequest.body
+      const { surveyId, accountId, answer } = request
       const survey = await this.loadSurveyResultById.loadById(surveyId)
       if (survey) {
         const answers = survey.answers.map(a => a.answer)
@@ -33,5 +32,13 @@ export class SaveSurveyResultController implements Controller {
     } catch (error) {
       return serverError(error)
     }
+  }
+}
+
+export namespace SaveSurveyResultController {
+  export type Request = {
+    surveyId: string
+    answer: string
+    accountId: string
   }
 }
