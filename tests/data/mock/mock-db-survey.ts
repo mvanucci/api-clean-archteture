@@ -3,7 +3,8 @@ import { LoadSurveyByIdRepository } from '@/data/protocols/db/survey/load-survey
 import { LoadSurveysRepository } from '@/data/protocols/db/survey/load-survey-repository'
 import { SurveyModel } from '@/domain/models/SurveyModel'
 import { mockSurveyModel, mockSurveyModels } from '@/tests/domain/mock'
-import { CheckSurveyByIdRepository } from '@/data'
+import { CheckSurveyByIdRepository, LoadAnswersBySurveyRepository } from '@/data'
+import faker from 'faker'
 
 export class AddSurveyRepositorySpy implements AddSurveyRepository {
   addSurveyParams: AddSurveyRepository.Params
@@ -22,6 +23,17 @@ export class LoadSurveyByIdRepositorySpy implements LoadSurveyByIdRepository {
     return this.result
   }
 }
+
+export class LoadAnswersBySurveyRepositorySpy implements LoadAnswersBySurveyRepository {
+  result = [faker.random.word(), faker.random.word()]
+  id: string
+
+  async loadAnswers (id: string): Promise<LoadAnswersBySurveyRepository.Result> {
+    this.id = id
+    return this.result
+  }
+}
+
 export class CheckSurveyByIdRepositorySpy implements CheckSurveyByIdRepository {
   result = true
   id: string
