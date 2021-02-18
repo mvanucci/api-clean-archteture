@@ -1,7 +1,7 @@
 import { JwtAdapter } from '@/infra/criptografy/jwt-adapter'
 import { AccountMongoRepository } from '@/infra/db/mongodb/account'
 import { DbLoadAccountByToken } from '@/data/usecases/db-load-account-by-token'
-import { LoadAccountByToken } from '@/domain/usecases/account/LoadAccountByToken'
+import { LoadAccountByToken } from '@/domain'
 import env from '@/main/config/env'
 
 export const makeDbLoadAccountByToken = (): LoadAccountByToken => {
