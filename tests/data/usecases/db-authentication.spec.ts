@@ -31,7 +31,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('DbAuthentication UseCase', async () => {
+describe('DbAuthentication UseCase', () => {
   test('should call LoadAccountByEmailRepository with correct email', async () => {
     const { sut, loadAccountByEmailRepositorySpy } = makeSut()
     const authenticationParams = mockAuthenticationParams()

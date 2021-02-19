@@ -1,4 +1,4 @@
-import { MongoHelper, SurveyResultMongoRepository } from '@/infra/db/mongodb'
+import { MongoHelper, SurveyResultMongoRepository } from '@/infra/db'
 import { SurveyModel } from '@/domain'
 import { Collection, ObjectId } from 'mongodb'
 import { mockAddSurveyParams, mockAddAccountParams } from '@/tests/domain/mock'

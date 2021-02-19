@@ -1,6 +1,6 @@
 import { AddAccount } from '@/domain/usecases/AddAccount'
 import { BcryptAdapter } from '@/infra/criptografy/bcrypt-adapter'
-import { AccountMongoRepository } from '@/infra/db/mongodb/account'
+import { AccountMongoRepository } from '@/infra/db/mongodb/add-account-mongo-repository'
 import { DbAddAccount } from '@/data/usecases/db-add-account'
 
 export const makeDbAddAccount = (): AddAccount => {

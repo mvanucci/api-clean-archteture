@@ -1,7 +1,3 @@
-export default {
-  Query: {
-    login () {
-      return { accessToken: 'any token', name: 'any name' }
-    }
-  }
-}
+import login from './login'
+
+export default [login]

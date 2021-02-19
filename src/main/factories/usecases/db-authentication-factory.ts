@@ -2,7 +2,7 @@ import { DbAuthentication } from '@/data'
 import { Authentication } from '@/domain'
 import { BcryptAdapter } from '@/infra/criptografy/bcrypt-adapter'
 import { JwtAdapter } from '@/infra/criptografy/jwt-adapter'
-import { AccountMongoRepository } from '@/infra/db/mongodb/account'
+import { AccountMongoRepository } from '@/infra/db/mongodb/add-account-mongo-repository'
 import env from '@/main/config/env'
 
 export const makeDbAuthentication = (): Authentication => {
