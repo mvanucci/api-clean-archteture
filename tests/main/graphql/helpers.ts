@@ -6,5 +6,6 @@ import typeDefs from '@/main/graphql/type-defs'
 export const makeApolloServer = (): ApolloServer => new ApolloServer({
   resolvers,
   typeDefs,
-  schemaDirectives
+  schemaDirectives,
+  context: ({ req }) => ({ req })
 })
