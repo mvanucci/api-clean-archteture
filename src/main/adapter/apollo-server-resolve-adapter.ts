@@ -2,9 +2,10 @@ import { makeLoginController } from '@/main/factories/controllers'
 import { Controller } from '@/presentation/protocols'
 import { UserInputError, AuthenticationError, ForbiddenError, ApolloError } from 'apollo-server-express'
 
-export const adaptResolver = async (controller: Controller, args: any): Promise<any> => {
+export const adaptResolver = async (controller: Controller, args?: any): Promise<any> => {
+  const request = { ...(args || {}) }
   const loginController = makeLoginController()
-  const httpResponse = await loginController.handle(args)
+  const httpResponse = await loginController.handle(request)
   switch (httpResponse.statusCode) {
     case 200:
     case 204: return httpResponse.body
