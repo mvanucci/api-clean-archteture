@@ -1,5 +1,5 @@
-import GraphQLDateTIme from 'graphql-iso-date'
+import { GraphQLDateTime } from 'graphql-iso-date'
 
 export default {
-  DateTime: GraphQLDateTIme
+  DateTime: GraphQLDateTime
 }
