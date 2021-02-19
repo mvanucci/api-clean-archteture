@@ -9,6 +9,7 @@ export default gql`
     signUp (name: String!, email: String!, password: String!, passwordConfirm: String!): Account!
   }
 
+
   type Account {
     accessToken: String!
     name: String!

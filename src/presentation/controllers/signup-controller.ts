@@ -41,6 +41,6 @@ export namespace SignUpController {
     name: string
     email: string
     password: string
-    passwordConfirmation: string
+    passwordConfirm: string
   }
 }
