@@ -1,4 +1,4 @@
-export * from './SignUpController'
+export * from './signup-controller'
 export * from './add-survey-controller'
 export * from './load-surveys-controller'
 export * from './login'
